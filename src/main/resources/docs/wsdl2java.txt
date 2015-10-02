@@ -1,0 +1,6 @@
+﻿wsdl2java -p  -d f:\src -client f:\accesstoken_manage_service_1_0.wsdl -encoding utf-8
+wsdl2java -p com.cmcc.wsdl.ecity.accesstoken.v1_0.service -d f:\src -encoding utf8 -client f:\accesstoken_manage_service_1_0.wsdl
+
+20150408201954
+20150408202827
+20150408202938

@@ -1,0 +1,29 @@
+<ehcache xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<!-- 除自身之外的网络群体中其他提供同步的主机列表，用“|”分开不同的主机(同步的主机的信息) -->
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446, timeToLive=32" />
+		
+	<!-- 配宿主主机配置监听程序，来发现其他主机发来的同步请求(当前主机的信息) -->
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="hostName=localhost,port=40002,socketTimeoutMillis=120000" />
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+	</defaultCache>
+
+	<cache name="colors" maxElementsInMemory="1000" eternal="false"
+		timeToIdleSeconds="100000" timeToLiveSeconds="100000"
+		overflowToDisk="false">
+		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+	</cache>
+	
+</ehcache>

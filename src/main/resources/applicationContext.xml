@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+	default-lazy-init="true">
+
+	<description>Spring公共配置</description>
+	
+	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+	<context:component-scan base-package="com.it">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- Jpa Entity Manager 配置 -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.it" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="jpaProperties">
+			<props>
+				<!-- 命名规则 My_NAME->MyName -->
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.hbm2ddl.auto">none</prop><!-- 对表结构仅进行验证，不进行更新与创建  creat,update none-->
+                <!-- Oracle 11g 方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<!--<prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop>-->
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="net.sf.ehcache.configurationResourceName">cache/ehcache-hibernate-local.xml</prop>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform">
+			<bean factory-method="getDialect" class="com.it.j2ee.core.jpa.persistence.Hibernates">
+				<constructor-arg ref="dataSource"/>
+			</bean>
+		</property>
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="false" />
+	</bean>
+
+	<!-- Spring Data Jpa配置 -->
+	<jpa:repositories base-package="com.it"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
+
+	<!-- Jpa 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
+	<!-- JSR303 Validator定义 -->
+	<!-- <bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />  -->
+
+	<!-- messages i18n 配置 -->
+	<!-- 
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">		 
+		<property name="basenames">
+			<list>
+				<value>i18n/messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${smtp.host}"></property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.timeout">25000</prop>
+			</props>
+		</property>
+		<property name="username" value="${smtp.username}"></property>
+		<property name="password" value="${smtp.password}"></property>
+	</bean>
+
+	<!--模板配置，用于短信及邮件模板-->
+	<bean id="freeMarker" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="classpath:template"/><!--指定模板文件目录-->
+		<property name="freemarkerSettings"><!-- 设置FreeMarker环境属性-->
+			<props>
+				<prop key="template_update_delay">1800</prop><!--刷新模板的周期，单位为秒-->
+				<prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
+				<prop key="locale">zh_CN</prop><!-- 本地化设置-->
+			</props>
+		</property>
+	</bean>
+
+    <!-- dev环境 -->
+	<beans profile="dev">
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath*:/conf/dev.properties" />
+
+        <!-- 数据源配置, 使用DBCP数据库连接池 -->
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+              destroy-method="close">
+            <!-- Connection Info -->
+            <property name="driverClassName" value="${jdbc.driver}" />
+            <property name="url" value="${jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password}" />
+
+            <!-- Connection Pooling Info -->
+            <property name="maxActive" value="40" />
+            <property name="maxIdle" value="5" />
+            <property name="defaultAutoCommit" value="true" />
+            <!-- 连接Idle一个小时后超时 -->
+            <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+            <property name="minEvictableIdleTimeMillis" value="3600000" />
+        </bean>
+    </beans>
+    
+    <!-- dev环境 -->
+	<beans profile="production">
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath*:/conf/production.properties" />
+
+        <!-- 数据源配置, 使用DBCP数据库连接池 -->
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+              destroy-method="close">
+            <!-- Connection Info -->
+            <property name="driverClassName" value="${jdbc.driver}" />
+            <property name="url" value="${jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password}" />
+
+            <!-- Connection Pooling Info -->
+            <property name="maxActive" value="40" />
+            <property name="maxIdle" value="5" />
+            <property name="defaultAutoCommit" value="true" />
+            <!-- 连接Idle一个小时后超时 -->
+            <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+            <property name="minEvictableIdleTimeMillis" value="3600000" />
+        </bean>
+    </beans>
+    
+    
+    
+
+
+</beans>

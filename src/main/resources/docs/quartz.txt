@@ -1,0 +1,4 @@
+http://liuzidong.iteye.com/blog/1149576  Quartz之QuartzInitializerListener
+http://liuzidong.iteye.com/blog/1149537  Quartz之QuartzInitializerServlet
+http://liuzidong.iteye.com/blog/1147528  一个任务执行后在执行第二个任务怎么办呢 ?
+http://itlab.idcquan.com/Java/advance/752064_3.html Quartz调度框架应用总结

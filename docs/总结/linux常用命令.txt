@@ -1,0 +1,80 @@
+【新建文件】
+vi、touch : 创建文件的命令
+例：touch program files : 会创建2个文件夹
+    touch "program files" : 只会创建1个文件夹
+类似命令：
+cp、mv
+echo nihao > /tmp/echo.txt
+cat testcat > /tmp/cat.txt
+less testless > /tmp/less.txt
+
+【vi】
+vi下面如何进行回车换行？ ESC + i + enter
+不保存并退出：q！
+保存并退出：x
+
+光标定位：
+G    移至最后一行行首
+nG    移至第n行行首
+n+    下移n行，行首
+n-    上移n行，行首
+n$    下移n行(1表示本行)，行尾
+0    所在行行首
+$    所在行行尾
+^    所在行首字母
+h,j,k,l  左移，下移，上移，右移
+H    当前屏幕首行行首
+M    屏幕显示文件的中间行行首
+L    当前屏幕最底行行首
+
+【vim】
+可以定义快捷键，更多高级输入方法
+
+【查看目录】
+ls : 
+ -l : 显示详细信息
+ -a\--all ：显示隐藏文件
+ -d ：显示文件夹
+ -rw-,r--,r-- ,首字母-表示是文件，d表示目录，l表示软连接,(文件所有者(u)、组用户(g)、其他用户(o)）,其中， r代表只读，w代表写，x代表可执行
+stat /etc/: 查看文件信息
+
+
+【查看文件内容】
+cat ：查看短内容
+more : 查看长内容
+	Ctrl+F   向下滚动一屏
+	空格键  向下滚动一屏
+	Ctrl+B  返回上一屏
+	Enter    向下n行
+	more +10 test.txt : 显示文件中从第10行起的内容
+	more -5 log2012.log： 设定每屏显示行数 
+less : 查看长内容，支持向上翻
+head : 从头开始查看
+tail : 从末尾开始查看
+	tail -n 5 xx.log: 显示文件最后5行内容
+	tail -f -n 5 xx.long: 动态显示最后5行内容，比如监控错误日志时
+	tail -f -n 200 /usr/local/tomcat/logs/catalina.out > /tmp/tomcatlog.log   
+	//将tomcat日志文件的最后200行内容写入到/tmp/tomcatlog.log文件中，如果/tmp/tomcatlog.log文件不存在，则会创建该文件，如果存在，则覆盖原文件的内容。
+
+【修改文件权限】
+chmod ： 改动文件或目录的访问权限
+chgrp : 改动文件或目录所属的组
+如：你要让文件有能够执行的权限，比如你的文件是a.sh那么你可以
+chmod +x a.sh
+
+【结束当前命令】
+ctrl+c
+q
+
+【关机重启】
+shutdown
+reboot
+sudo -s = su : 切换到root用户
+exit 返回到先前用户
+
+密码：flzx3qc
+
+tar zxvf xx.tar.gz -C /usr/local/xx
+
+
+

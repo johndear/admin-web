@@ -1,0 +1,56 @@
+===============【java基础 】=============== 边做边积累，从简单开始！
+xml: dtd、xsd ， 参考：http://www.w3school.com.cn/schema/schema_howto.asp
+encrypt: 加解密
+flect: 反射
+classloader: 类加载器
+exception: 异常
+thread： 多线程  -- 未知！ http://www.runoob.com/java/java-multithreading.html
+proxy， 参考dubbo-common--写得很好！！
+
+===============【 服务端技术列表 】===============
+shiro 登陆和权限控制
+ehcache 集群
+memcache 分布式缓存
+quartz 定时调度平台   
+email 简单或带附件格式的邮件
+jms 消息队列
+webservice[jaxws、jaxrs]  cxf实现
+solr -- 外部组件
+luence
+mongoDB--- https://www.mongodb.org/downloads
+NodeJs --- https://nodejs.org/en/#download
+redis
+NoSQL
+Docker
+
+===============【 前端技术列表 】===============
+JQuery,Easyui,Bootstrap,jQueryUI,AngularJS，DoJo
+
+===============【 doing 】===============
+solr 搜索引擎
+workflow 工作流
+report 报表
+图表
+
+===============【 todo 】===============
+权限控制时，自定义插件控制前端按钮显示，参考sshpermission项目
+metrics 指标度量工具
+Jenkins 服务管理工具
+apache Pluto（portlet） 搭建portal
+
+===============【 深入浅出 】===============
+原理：
+tomcat与jetty原理和区别（包括jsp、classloader编译原理）
+spring原理
+sso 单点实现原理
+
+
+
+
+
+
+
+
+
+
+
