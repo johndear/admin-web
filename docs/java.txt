@@ -1,0 +1,40 @@
+java基础技术：http://www.importnew.com/cat/basic/page/9
+java代码到字节码：http://www.importnew.com/13107.html
+java动态代理机制详解（jdk\cglib\javassist\asm）：http://www.360doc.com/content/14/0801/14/1073512_398598312.shtml
+java动态代理性能对比：http://javatar.iteye.com/blog/814426
+java asm: http://www.ibm.com/developerworks/cn/java/j-lo-asm30/
+	  http://www.oseye.net/user/kevin/blog/304
+java静态代理和动态代理： http://www.360doc.com/content/11/0917/23/8442_149122057.shtml
+类加载器：https://www.ibm.com/developerworks/cn/java/j-lo-classloader/
+
+
+rmi: http://www.360doc.com/content/09/1214/22/535646_11136156.shtml
+运用加密技术保护Java源代码: http://www.360doc.com/content/05/0925/14/73_14700.shtml
+dubbo: http://www.360doc.com/content/12/0411/23/9350055_202900701.shtml
+HSF：http://www.360doc.com/content/12/0412/11/9350055_202984237.shtml
+Nio：http://weixiaolu.iteye.com/blog/1479656
+	http://www.infoq.com/cn/articles/practice-of-java-nio-communication-framework?utm_source=tuicool
+Netty: http://www.oseye.net/project/netty
+hadoop RPC:http://weixiaolu.iteye.com/blog/1504898
+Keepalived: http://www.oseye.net/project/keepalived
+正则表达式：http://www.oseye.net/user/kevin/blog/170
+页面布局框架：apache tiles\SiteMesh 
+Apache Click - Java EE 框架: http://www.oseye.net/project/apache-click
+jspx - Java Web框架: http://www.oseye.net/project/jspx
+开发环境指南： http://www.importnew.com/10127.html
+多线程死锁：http://www.importnew.com/10661.html
+Quartz快速入门：http://www.importnew.com/4107.html
+异步Servlet：http://www.importnew.com/8864.html
+jvm性能监控工具：http://www.importnew.com/16145.html
+threadLocal:http://www.importnew.com/16112.html
+volatile:http://www.importnew.com/16127.html
+自定义javaweb框架：http://www.importnew.com/16045.html
+设计模式：http://www.importnew.com/15524.html
+	http://www.importnew.com/15585.html
+	http://www.importnew.com/15582.html
+设计模式：http://blog.chinaunix.net/uid-27106528-id-4758319.html
+sql注入：http://www.uqbook.cn/html/2011/tech_1218/43.html
+开源项目：http://blog.csdn.net/banketree/article/details/9194675
+java开发框架：http://tech.it168.com/a2009/1207/820/000000820681_all.shtml
+权限系统：http://blog.chinaunix.net/uid-24343152-id-3673026.html
+大数据：http://blog.nosqlfan.com/html/4209.html
