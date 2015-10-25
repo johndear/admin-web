@@ -1,5 +1,6 @@
 package com.it.j2ee.core.thread;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -24,16 +25,18 @@ public class SingleInstance {
 	}
 	
 	public static SingleInstance getInstance(){
-//		synchronized (lock) {
-			if(instance== null){// 线程1、2同时进入方法体
-				// 线程1还没执行完，线程2就已经判断实例是否存在，为了避免这种情况的发生，加上锁，只有等锁被释放，才允许下一个线程执行
-				instance = new SingleInstance();
-			}
-			return instance;
+//		if(instance== null){
+	//		synchronized (lock) {
+				if(instance== null){// 线程1、2同时进入方法体
+					// 线程1还没执行完，线程2就已经判断实例是否存在，为了避免这种情况的发生，加上锁，只有等锁被释放，才允许下一个线程执行
+					instance = new SingleInstance();
+				}
+				return instance;
+	//		}
 //		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		// 创建一个线程池  
 		ExecutorService pool = Executors.newFixedThreadPool(1000);  
 		 
@@ -45,6 +48,8 @@ public class SingleInstance {
 			};
 			
 			Future f = pool.submit(run);  
+			// 等待子线程结束
+			f.get();
 		}  
 		
 		// 关闭线程池  
