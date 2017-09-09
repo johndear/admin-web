@@ -5,7 +5,7 @@ package com.it.j2ee.core.bytecode.Javassist.demo1;
  * @author louluan 
  */  
 public class Station implements TicketService {  
-  
+	
     @Override  
     public void sellTicket() {  
         System.out.println("\n\t售票.....\n");  
@@ -19,6 +19,11 @@ public class Station implements TicketService {
     @Override  
     public void withdraw() {  
         System.out.println("\n\t退票......\n");  
+    }  
+    
+    public int total(int a,int b) {  
+        System.out.println("\n\t退票......\n");
+        return a+b;
     }  
   
 }  

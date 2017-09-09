@@ -3,8 +3,8 @@ package com.it.j2ee.core.bytecode.Javassist.demo1;
 public class StationProxy implements TicketService {  
 		  
 	    private Station station;  
-	  
-	    public StationProxy(Station station){  
+	    
+		public StationProxy(Station station){  
 	        this.station = station;  
 	    }  
 	      
@@ -54,7 +54,12 @@ public class StationProxy implements TicketService {
 	     */  
 	    private void takeHandlingFee() {  
 	        System.out.println("收取手续费，打印发票。。。。。\n");  
-	    }  
+	    }
+
+		public int total(int i, int j) {
+			// TODO Auto-generated method stub
+			return 0;
+		}  
 	  
 	
 }

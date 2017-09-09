@@ -3,7 +3,7 @@ package com.it.j2ee.core.bytecode.jdk;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
-import com.it.j2ee.core.bytecode.ProxyUtils;
+import com.it.j2ee.core.util.ProxyUtils;
 
 public class Test {
 

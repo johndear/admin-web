@@ -22,6 +22,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
+
+
+import com.it.j2ee.core.bytecode.Javassist.demo1.Station;
+import com.it.j2ee.core.bytecode.asm.Programmer;
+import com.it.j2ee.core.util.ProxyUtils;
+
 import junit.framework.TestCase;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -84,5 +90,10 @@ public class ProxyTest extends TestCase
 		String getName();
 
 		void setName(String name, String name2);
+	}
+	
+	public static void main(String[] args) throws Exception {
+//		ProxyUtils.generateClassFile(Station.class, "Station$proxy1");
+		ProxyUtils.generateClassFileByCglib(Programmer.class,"Programmer$proxy1");
 	}
 }

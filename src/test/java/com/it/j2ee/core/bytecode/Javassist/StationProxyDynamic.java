@@ -36,7 +36,7 @@ public class StationProxyDynamic {
 		ClassPool pool = ClassPool.getDefault();
 
 		CtClass cc = pool
-				.makeClass("com.it.j2ee.core.bytecode.Javassist.demo1.StationProxy");
+				.makeClass("com.StationProxy");
 
 		// 设置接口
 		CtClass interface1 = pool

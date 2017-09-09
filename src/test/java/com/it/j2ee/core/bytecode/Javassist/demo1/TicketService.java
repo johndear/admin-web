@@ -9,6 +9,8 @@ public interface TicketService {
     public void inquire();  
       
     //退票  
-    public void withdraw();  
+    public void withdraw();
+
+//	public int total(int i, int j);  
       
 }  
