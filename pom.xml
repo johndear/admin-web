@@ -208,7 +208,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.83</version>
 		</dependency>
 
 		<!-- 正则表达式 start -->
